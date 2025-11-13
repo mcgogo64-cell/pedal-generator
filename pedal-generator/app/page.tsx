@@ -64,29 +64,62 @@ export default function Home() {
                   RPM (Revolutions Per Minute)
                   <InfoTooltip content="Your pedal speed in revolutions per minute. Average: 60-120 RPM. Total rotations = RPM × Duration (minutes)." />
                 </label>
-                <input 
-                  type="number" 
-                  min={1} 
-                  max={200} 
-                  value={rpm} 
-                  onChange={(e) => setRpm(Number(e.target.value))} 
-                  className="mt-2 w-full rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 px-3 py-2 outline-none focus:border-zinc-500" 
-                />
+                <div className="mt-2 space-y-2">
+                  <input 
+                    type="range" 
+                    min={30} 
+                    max={180} 
+                    step={5}
+                    value={rpm} 
+                    onChange={(e) => setRpm(Number(e.target.value))} 
+                    className="w-full" 
+                  />
+                  <div className="flex items-center gap-2">
+                    <input 
+                      type="number" 
+                      min={30} 
+                      max={180} 
+                      step={5}
+                      value={rpm} 
+                      onChange={(e) => setRpm(Number(e.target.value))} 
+                      className="w-24 rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 px-3 py-2 outline-none focus:border-zinc-500 text-sm" 
+                    />
+                    <span className="text-xs text-zinc-500 dark:text-zinc-500">RPM</span>
+                  </div>
+                </div>
                 <div className="mt-1 text-xs text-zinc-500 dark:text-zinc-500">Total rotations: {rotations.toLocaleString()}</div>
               </div>
               <div>
                 <label className="flex items-center text-sm font-medium text-zinc-700 dark:text-zinc-300">
-                  Duration (seconds)
+                  Duration
                   <InfoTooltip content="How long you pedal. Total rotations = RPM × (Duration / 60) is calculated automatically." />
                 </label>
-                <input 
-                  type="number" 
-                  min={1} 
-                  value={durationSec} 
-                  onChange={(e) => setDurationSec(Number(e.target.value))} 
-                  className="mt-2 w-full rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 px-3 py-2 outline-none focus:border-zinc-500" 
-                />
-                <div className="mt-1 text-xs text-zinc-500 dark:text-zinc-500">{Math.round(durationSec / 60)} minutes</div>
+                <div className="mt-2 grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-xs text-zinc-600 dark:text-zinc-400 mb-1">Minutes</label>
+                    <input 
+                      type="number" 
+                      min={0} 
+                      step={0.5}
+                      value={Math.round((durationSec / 60) * 10) / 10} 
+                      onChange={(e) => setDurationSec(Math.round(Number(e.target.value) * 60))} 
+                      className="w-full rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 px-3 py-2 outline-none focus:border-zinc-500" 
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs text-zinc-600 dark:text-zinc-400 mb-1">Seconds</label>
+                    <input 
+                      type="number" 
+                      min={0} 
+                      value={durationSec} 
+                      onChange={(e) => setDurationSec(Number(e.target.value))} 
+                      className="w-full rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 px-3 py-2 outline-none focus:border-zinc-500" 
+                    />
+                  </div>
+                </div>
+                <div className="mt-1 text-xs text-zinc-500 dark:text-zinc-500">
+                  Total: {Math.floor(durationSec / 60)}m {durationSec % 60}s
+                </div>
               </div>
               <div>
                 <label className="flex items-center text-sm font-medium text-zinc-700 dark:text-zinc-300">
@@ -166,6 +199,11 @@ export default function Home() {
                   <motion.span>{animPct.toFixed(1)}</motion.span><span className="text-lg sm:text-xl">%</span>
                 </div>
                 <div className="text-xs sm:text-sm text-emerald-600/70 dark:text-emerald-400/70 mt-1">capacity: {batteryCapacityWh} Wh</div>
+                {animPct > 0 && (
+                  <div className="mt-2 text-xs sm:text-sm text-emerald-600/80 dark:text-emerald-400/80 italic">
+                    enough to charge a phone ~{Math.round((animWh / 12) * 100)}%
+                  </div>
+                )}
               </div>
 
               {/* Avg Power - Purple/Indigo */}
