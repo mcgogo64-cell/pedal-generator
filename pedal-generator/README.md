@@ -79,13 +79,18 @@ The easiest way to deploy is using [Vercel](https://vercel.com):
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/mcgogo64-cell/pedal-generator)
 
-### Deploy on Netlify
+**Important:** If your project is in a subdirectory (e.g., `pedal-generator/`), make sure to:
 
-This project includes a `netlify.toml` configuration file. You can deploy directly to Netlify:
+1. Go to your project settings in Vercel Dashboard
+2. Navigate to **Settings → General → Build & Development Settings**
+3. Set **Root Directory** to `pedal-generator`
+4. Save and redeploy
 
-1. Push your code to GitHub
-2. Import the repository in Netlify
-3. Netlify will automatically detect the Next.js configuration
+Vercel will automatically:
+- Detect Next.js framework
+- Optimize builds with SWC
+- Enable image optimization
+- Configure edge functions if needed
 
 ## Project Structure
 
