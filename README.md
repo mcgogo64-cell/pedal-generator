@@ -32,7 +32,7 @@ An interactive web application that simulates a pedal-powered generator, calcula
 1. Clone the repository:
 ```bash
 git clone https://github.com/mcgogo64-cell/pedal-generator.git
-cd pedal-generator/pedal-generator
+cd pedal-generator
 ```
 
 2. Install dependencies:
@@ -79,31 +79,34 @@ The easiest way to deploy is using [Vercel](https://vercel.com):
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/mcgogo64-cell/pedal-generator)
 
-**Important:** If your project is in a subdirectory (e.g., `pedal-generator/`), make sure to:
-
-1. Go to your project settings in Vercel Dashboard
-2. Navigate to **Settings → General → Build & Development Settings**
-3. Set **Root Directory** to `pedal-generator`
-4. Save and redeploy
+1. Push your code to GitHub
+2. Import your repository in Vercel
+3. Vercel will automatically detect Next.js and configure everything
+4. Click Deploy!
 
 Vercel will automatically:
 - Detect Next.js framework
 - Optimize builds with SWC
 - Enable image optimization
-- Configure edge functions if needed
+- Configure edge functions
 
 ## Project Structure
 
 ```
-pedal-generator/
 ├── app/
 │   ├── layout.tsx      # Root layout
 │   ├── page.tsx         # Main page component
 │   └── globals.css      # Global styles
 ├── components/
-│   └── MotionProvider.tsx  # Framer Motion provider
+│   ├── InfoTooltip.tsx
+│   ├── LanguageSelector.tsx
+│   └── MotionProvider.tsx
+├── lib/
+│   └── translations.ts  # Multi-language support
 ├── public/              # Static assets
-└── ...config files
+├── next.config.ts       # Next.js configuration
+├── tailwind.config.ts   # Tailwind CSS configuration
+└── package.json
 ```
 
 ## License
